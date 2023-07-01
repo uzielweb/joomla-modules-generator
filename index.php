@@ -5,7 +5,7 @@
 // description: This file is the main file of the module generator.
 // license: GPL
 // license-url: https://www.gnu.org/licenses/gpl-3.0.html
-// GitHub: https://github.com/uzielweb/joomla-module-generator
+// GitHub: https://github.com/uzielweb/joomla-modules-generator
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['module_title'])) {
  // Function to generate a sanitized module name
