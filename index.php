@@ -111,9 +111,9 @@ $moduleFolder = $moduleName;
 $joomlaVersion = $_POST['joomla_version'];
 
 createModule($moduleName, $joomlaVersion);
-$ModuleClient = ucwords($client);
-// \n/**\n * @package     Joomla.{$ModuleClient}\n * @subpackage  {$moduleName}\n * Author: {$moduleAuthor}\n * Author Email: {$moduleAuthorEmail}\n * Author URL: {$moduleAuthorUrl}\n * License: {$moduleLicense}\n * @copyright   (C) 2010 Open Source Matters, Inc. <https://www.joomla.org>\n * @license     {$moduleLicense}\n
-$phpHeaders = "\n/**\n * @package Joomla.{$ModuleClient}\n * @subpackage {$moduleName}\n * Author: {$moduleAuthor}\n * Author Email: {$moduleAuthorEmail}\n * Author URL: {$moduleAuthorUrl}\n * License: {$moduleLicense}\n * @copyright (C) 2010 Open Source Matters, Inc. <https://www.joomla.org>\n * @license {$moduleLicense}\n */";
+$moduleClient = ucwords($client);
+// \n/**\n * @package     Joomla.{$moduleClient}\n * @subpackage  {$moduleName}\n * Author: {$moduleAuthor}\n * Author Email: {$moduleAuthorEmail}\n * Author URL: {$moduleAuthorUrl}\n * License: {$moduleLicense}\n * @copyright   (C) 2010 Open Source Matters, Inc. <https://www.joomla.org>\n * @license     {$moduleLicense}\n
+$phpHeaders = "\n/**\n * @package Joomla.{$moduleClient}\n * @subpackage {$moduleName}\n * Author: {$moduleAuthor}\n * Author Email: {$moduleAuthorEmail}\n * Author URL: {$moduleAuthorUrl}\n * License: {$moduleLicense}\n * @copyright (C) 2010 Open Source Matters, Inc. <https://www.joomla.org>\n * @license {$moduleLicense}\n */";
 if ($joomlaVersion == '3') {
 $modulePHP = "<?php{$phpHeaders}\ndefined('_JEXEC') or die;\nuse Joomla\CMS\Factory;\nuse Joomla\CMS\Helper\ModuleHelper;\nrequire_once dirname(__FILE__) . '/helper.php';\n\$doc = Factory::getDocument();\n\$doc->addStyleSheet('modules/{$moduleName}/assets/css/style.css');\n\$doc->addScript('modules/{$moduleName}/assets/js/script.js');\n\$moduleclass_sfx = htmlspecialchars(\$params->get('moduleclass_sfx'), ENT_QUOTES);\nrequire ModuleHelper::getLayoutPath('{$moduleName}', \$params->get('layout', 'default'));\nif(\$params->get('backgroundimage')) {\n\$doc->addStyleDeclaration('\n#module-itemslist-id-'.\$module->id.' {\nbackground-image: url('.\$params->get('backgroundimage').');\n}');\n}\n?>";
 
@@ -129,8 +129,8 @@ file_put_contents('temp/'.$moduleName.'/tmpl/default.php', $defaultTmplPHP);
 }
 if ($joomlaVersion == '4') {
 
-  $modulePHP = "<?php{$phpHeaders}\n */\n\ndefined('_JEXEC') or die;\n\nuse Joomla\CMS\Helper\ModuleHelper;\nuse Joomla\Module\\{$helperName}\\{$ModuleClient}\Helper\\{$helperName}Helper;\n\n\$doc = Joomla\CMS\Factory::getDocument();\n\$doc->addStyleSheet('modules/{$moduleName}/media/css/style.css');\n\$doc->addScript('modules/{$moduleName}/media/js/script.js');\n\$moduleclass_sfx = htmlspecialchars(\$params->get('moduleclass_sfx'), ENT_QUOTES);\nrequire ModuleHelper::getLayoutPath('{$moduleName}', \$params->get('layout', 'default'));\nif(\$params->get('backgroundimage')) {\n\$doc->addStyleDeclaration('\n#module-itemslist-id-'.\$module->id.' {\nbackground-image: url('.\$params->get('backgroundimage').');\n}');\n}\n?>";
-  $helperPHP = "<?php{$phpHeaders}\n */\n\nnamespace Joomla\Module\\{$helperName}\\{$ModuleClient}\Helper;\n\nuse Joomla\CMS\Association\AssociationServiceInterface;\nuse Joomla\CMS\Factory;\nuse Joomla\CMS\Language\Associations;\nuse Joomla\CMS\Language\LanguageHelper;\nuse Joomla\CMS\Language\Multilanguage;\nuse Joomla\CMS\Router\Route;\nuse Joomla\CMS\Uri\Uri;\nuse Joomla\Component\Menus\Administrator\Helper\MenusHelper;\n\n// phpcs:disable PSR1.Files.SideEffects\n\defined('_JEXEC') or die;\n// phpcs:enable PSR1.Files.SideEffects\n\n/**\n * Helper for {$moduleName}\n *\n * @since  1.6\n */\nabstract class {$helperName}Helper\n{\n    /**\n     * Gets a list of available items\n     *\n     * @param   \\Joomla\\Registry\\Registry  &\$params  module params\n     *\n     * @return  array\n     */\n    public static function getList(&\$params)\n    {\n\n        \$items = false;\n\n        return \$items;\n    }\n}\n";
+  $modulePHP = "<?php{$phpHeaders}\n */\n\ndefined('_JEXEC') or die;\n\nuse Joomla\CMS\Helper\ModuleHelper;\nuse Joomla\Module\\{$helperName}\\{$moduleClient}\Helper\\{$helperName}Helper;\n\n\$doc = Joomla\CMS\Factory::getDocument();\n\$doc->addStyleSheet('modules/{$moduleName}/media/css/style.css');\n\$doc->addScript('modules/{$moduleName}/media/js/script.js');\n\$moduleclass_sfx = htmlspecialchars(\$params->get('moduleclass_sfx'), ENT_QUOTES);\nrequire ModuleHelper::getLayoutPath('{$moduleName}', \$params->get('layout', 'default'));\nif(\$params->get('backgroundimage')) {\n\$doc->addStyleDeclaration('\n#module-itemslist-id-'.\$module->id.' {\nbackground-image: url('.\$params->get('backgroundimage').');\n}');\n}\n?>";
+  $helperPHP = "<?php{$phpHeaders}\n */\n\nnamespace Joomla\Module\\{$helperName}\\{$moduleClient}\Helper;\n\nuse Joomla\CMS\Association\AssociationServiceInterface;\nuse Joomla\CMS\Factory;\nuse Joomla\CMS\Language\Associations;\nuse Joomla\CMS\Language\LanguageHelper;\nuse Joomla\CMS\Language\Multilanguage;\nuse Joomla\CMS\Router\Route;\nuse Joomla\CMS\Uri\Uri;\nuse Joomla\Component\Menus\Administrator\Helper\MenusHelper;\n\n// phpcs:disable PSR1.Files.SideEffects\n\defined('_JEXEC') or die;\n// phpcs:enable PSR1.Files.SideEffects\n\n/**\n * Helper for {$moduleName}\n *\n * @since  1.6\n */\nabstract class {$helperName}Helper\n{\n    /**\n     * Gets a list of available items\n     *\n     * @param   \\Joomla\\Registry\\Registry  &\$params  module params\n     *\n     * @return  array\n     */\n    public static function getList(&\$params)\n    {\n\n        \$items = false;\n\n        return \$items;\n    }\n}\n";
   $defaultTmplPHP="<?php{$phpHeaders}\n */\n\ndefined('_JEXEC') or die;\n\nuse Joomla\CMS\HTML\HTMLHelper;\nuse Joomla\CMS\Language\Text;\n\n\$items = {$helperName}Helper::getList(\$params);\n?>\n<div id=\"module-itemslist-id-<?php echo \$module->id; ?>\" class=\"{$moduleName}_itemslist\">\n<?php if (\$params->get('customtext', 0)) : ?>\n<div class=\"customtext\">\n<?php echo HTMLHelper::_('content.prepare', \$params->get('customtext')); ?>\n</div>\n<?php endif; ?>\n<?php if(\$items) : ?>\n<div class=\"items\">\n<?php foreach (\$items as \$item) : ?>\n<div class=\"item\">\n<h2><?php echo \$item->title; ?></h2>\n<p><?php echo \$item->text; ?></p>\n</div>\n<?php endforeach; ?>\n</div>\n<?php endif; ?>\n</div>";
   // camera photo svg
 $svgImage = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M480 128h-96l-32-64h-160l-32 64h-96c-26.51 0-48 21.49-48 48v256c0 26.51 21.49 48 48 48h384c26.51 0 48-21.49 48-48v-256c0-26.51-21.49-48-48-48zm-240 288c-79.529 0-144-64.471-144-144s64.471-144 144-144 144 64.471 144 144-64.471 144-144 144zm0-240c-53.019 0-96 42.981-96 96s42.981 96 96 96 96-42.981 96-96-42.981-96-96-96zm192 192h-32v-32h32v32zm0-64h-32v-96h32v96z"/></svg>';
@@ -359,7 +359,7 @@ $files = new RecursiveIteratorIterator(
 // create the zip
 // zip the files and folders inside the temp folder with the correct folder structure
 $zip = new ZipArchive();
-$zip->open("temp/{$moduleName}.zip", ZipArchive::CREATE | ZipArchive::OVERWRITE);
+$zip->open("temp/{$moduleName}-J{$joomlaVersion}-{$moduleClient}-V{$moduleVersion}.zip", ZipArchive::CREATE | ZipArchive::OVERWRITE);
 if ($joomlaVersion == 3) {
   
 $files = [
@@ -440,9 +440,11 @@ else {
    <?php if (isset($moduleName)) : ?>
 <div class="alert alert-success" role="alert">
 
-  <h2><?php echo sprintf($translations['MODULE_GENERATED'], '<strong>'.$moduleTitle.'</strong>'); ?></h2>
+  <h2><?php 
+  // "Módulo %1s versão %2s para Joomla %3s gerado com sucesso!"
+   echo sprintf($translations['MODULE_GENERATED'], '<strong>'.$moduleTitle.'</strong>', $moduleVersion, $joomlaVersion); ?></h2>
 
-  <p><a class="btn btn-success" href="temp/<?php echo $moduleName; ?>.zip" role="button"><?php echo $translations['DOWNLOAD_MODULE']; ?></a></p>
+  <p><a class="btn btn-success" href="<?php echo 'temp/'.$moduleName.'-J'.$joomlaVersion.'-'.$moduleClient.'-V'.$moduleVersion.'.zip'; ?>" role="button"><?php echo $translations['DOWNLOAD_MODULE']; ?></a></p>
 </div>
 <?php endif; ?>
   </header>
